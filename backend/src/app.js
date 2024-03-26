@@ -1,4 +1,4 @@
-import exress from "express";
+import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -9,9 +9,15 @@ app.use(
     credentials: true,
   })
 );
-app.use(exress.json({ limit: "32kb" }));
-app.use(exress.urlencoded({ limit: "32kb", extended: true }));
-app.use(exress.static("public"));
+app.use(express.json({ limit: "32kb" }));
+app.use(express.urlencoded({ limit: "32kb", extended: true }));
+app.use(express.static("public"));
 app.use(cookieParser());
+
+// import router
+import userRouter from "./routes/user.router.js";
+
+// use router
+app.use("/api/v1/users", userRouter);
 
 export default app;
